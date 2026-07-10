@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Testläufe</title>
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}">
+</head>
+<body>
+<div th:replace="fragments/navigation :: navigation"></div>
+<main class="page">
+    <section class="titlebar">
+        <div class="titlebar__inner">Testläufe</div>
+    </section>
+
+    <section class="content-single">
+        <a class="btn btn--yellow btn--inline" th:href="@{/testruns/new}">+ Neuer Testlauf</a>
+
+        <table class="datatable">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Tester</th>
+                <th>Zugeordnete Testfälle</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="run : ${testRuns}">
+                <td><a th:href="@{'/testruns/' + ${run.id}}" th:text="${run.name}">Testlauf</a></td>
+                <td th:text="${run.tester}">Tester</td>
+                <td th:text="${run.executions != null ? run.executions.size() : 0}">0</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(testRuns)}">
+                <td colspan="3">Noch keine Testläufe vorhanden.</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

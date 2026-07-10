@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Testlauf</title>
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}">
+</head>
+<body>
+<div th:replace="fragments/navigation :: navigation"></div>
+<main class="page">
+    <section class="titlebar">
+        <div class="titlebar__inner">
+            Testlauf: <span th:text="${testRun.name}">Name</span>
+            (Tester: <span th:text="${testRun.tester}">Tester</span>)
+        </div>
+    </section>
+
+    <section class="content-single">
+        <a class="btn btn--yellow btn--inline"
+           th:href="@{'/testruns/' + ${testRun.id} + '/assign'}">Testfälle zuordnen</a>
+
+        <h3>Zugeordnete Testfälle</h3>
+        <table class="datatable">
+            <thead>
+            <tr>
+                <th>Testfall</th>
+                <th>Anforderung</th>
+                <th>Ergebnis</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="exec : ${executions}">
+                <td th:text="${exec.testCase.title}">Testfall</td>
+                <td th:text="${exec.testCase.requirement.title}">Anforderung</td>
+                <td>
+                    <!-- Ergebnis noch nicht gesetzt -> Formular anzeigen -->
+                    <form th:if="${exec.result == 'Not Executed'}"
+                          th:action="@{'/testruns/' + ${testRun.id} + '/testcases/' + ${exec.testCase.id} + '/result'}"
+                          method="post" class="inline-form">
+                        <select name="result">
+                            <option value="Passed">Bestanden</option>
+                            <option value="Failed">Fehlgeschlagen</option>
+                        </select>
+                        <button class="btn btn--yellow btn--small" type="submit">Speichern</button>
+                    </form>
+                    <!-- Ergebnis gesetzt -> Status anzeigen -->
+                    <span th:unless="${exec.result == 'Not Executed'}"
+                          th:classappend="${exec.result == 'Passed'} ? 'badge badge--pass' : 'badge badge--fail'"
+                          th:text="${exec.result == 'Passed'} ? 'Bestanden' : 'Fehlgeschlagen'">Ergebnis</span>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(executions)}">
+                <td colspan="3">Noch keine Testfälle zugeordnet.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p><a class="link" th:href="@{/testruns}">Zurück zu Testläufen</a></p>
+    </section>
+</main>
+</body>
+</html>

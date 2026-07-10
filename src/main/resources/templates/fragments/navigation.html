@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="navigation" class="topbar">
+    <div class="topbar__inner">
+        <a class="topbar__tab" th:href="@{/requirements}">Anforderungen</a>
+        <a class="topbar__tab" th:href="@{/testruns}">Testläufe</a>
+    </div>
+</div>
+
+</body>
+</html>

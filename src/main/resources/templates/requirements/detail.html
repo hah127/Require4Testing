@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Anforderung</title>
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}">
+</head>
+<body>
+<div th:replace="fragments/navigation :: navigation"></div>
+<main class="page">
+    <section class="titlebar">
+        <div class="titlebar__inner" th:text="${requirement.title}">Anforderungstitel</div>
+    </section>
+
+    <section class="content-single">
+        <p th:text="${requirement.description}">Beschreibung...</p>
+
+        <h3>Testfälle</h3>
+        <a class="btn btn--yellow btn--inline"
+           th:href="@{'/requirements/' + ${requirement.id} + '/testcases/new'}">+ Neuer Testfall</a>
+
+        <table class="datatable">
+            <thead>
+            <tr>
+                <th>Titel</th>
+                <th>Beschreibung</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="tc : ${testCases}">
+                <td th:text="${tc.title}">Testfall</td>
+                <td th:text="${tc.description}">Beschreibung</td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(testCases)}">
+                <td colspan="2">Keine Testfälle vorhanden.</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p><a class="link" th:href="@{/requirements}">Zurück zu Anforderungen</a></p>
+    </section>
+</main>
+</body>
+</html>

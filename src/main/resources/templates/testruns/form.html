@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Neuer Testlauf</title>
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}">
+</head>
+<body>
+<div th:replace="fragments/navigation :: navigation"></div>
+<main class="page">
+    <section class="titlebar">
+        <div class="titlebar__inner">Neuer Testlauf</div>
+    </section>
+
+    <section class="content-single">
+        <form class="form" th:action="@{/testruns/new}" th:object="${testRun}" method="post">
+            <div class="form__row">
+                <label>Name des Laufs</label>
+                <input type="text" th:field="*{name}"/>
+                <span class="form__error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Fehler</span>
+            </div>
+            <div class="form__row">
+                <label>Tester</label>
+                <input type="text" th:field="*{tester}"/>
+                <span class="form__error" th:if="${#fields.hasErrors('tester')}" th:errors="*{tester}">Fehler</span>
+            </div>
+            <div class="form__actions">
+                <button class="btn btn--yellow btn--inline" type="submit">Anlegen</button>
+                <a class="link" th:href="@{/testruns}">Zurück zur Übersicht</a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

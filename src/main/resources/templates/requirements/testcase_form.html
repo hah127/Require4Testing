@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Neuer Testfall</title>
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}">
+</head>
+<body>
+<div th:replace="fragments/navigation :: navigation"></div>
+<main class="page">
+    <section class="titlebar">
+        <div class="titlebar__inner">
+            Neuer Testfall für: <span th:text="${requirementTitle}">Anforderung</span>
+        </div>
+    </section>
+
+    <section class="content-single">
+        <form class="form"
+              th:action="@{'/requirements/' + ${requirementId} + '/testcases/new'}"
+              th:object="${testCase}" method="post">
+            <div class="form__row">
+                <label>Testfall-Titel</label>
+                <input type="text" th:field="*{title}"/>
+                <span class="form__error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Fehler</span>
+            </div>
+            <div class="form__row">
+                <label>Beschreibung</label>
+                <textarea th:field="*{description}"></textarea>
+            </div>
+            <div class="form__actions">
+                <button class="btn btn--yellow btn--inline" type="submit">Hinzufügen</button>
+                <a class="link" th:href="@{'/requirements/' + ${requirementId}}">Zurück zur Anforderung</a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

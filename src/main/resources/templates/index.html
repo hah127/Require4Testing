@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Require4Testing</title>
+
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}">
+</head>
+<body>
+
+<div th:replace="fragments/navigation :: navigation"></div>
+<main class="page">
+
+    <section class = "titlebar">
+        <div class="titlebar__inner">Require4Testing</div>
+    </section>
+
+    <section class = "content">
+
+        <article class="card">
+            <h2>Projektbeschreibung</h2>
+            <p>Erklärung</p>
+        </article>
+
+        <aside class="actions">
+            <a class="btn btn--yellow" th:href="@{/requirements}">Anforderungen</a>
+            <a class="btn btn--yellow" th:href="@{/testruns}">Testläufe</a>
+        </aside>
+    </section>
+</main>
+</body>
+</html>

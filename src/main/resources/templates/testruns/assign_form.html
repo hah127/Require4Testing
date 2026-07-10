@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Testfälle zuordnen</title>
+    <link rel="stylesheet" th:href="@{/css/stylesheet.css}">
+</head>
+<body>
+<div th:replace="fragments/navigation :: navigation"></div>
+<main class="page">
+    <section class="titlebar">
+        <div class="titlebar__inner">Testfälle zuordnen</div>
+    </section>
+
+    <section class="content-single">
+        <form class="form" th:action="@{'/testruns/' + ${runId} + '/assign'}" method="post">
+            <div class="checkbox-row" th:each="tc : ${allTestCases}">
+                <label>
+                    <input type="checkbox" name="testCaseIds" th:value="${tc.id}"/>
+                    <span th:text="${tc.title + ' (' + tc.requirement.title + ')'}">Testfall (Anforderung)</span>
+                </label>
+            </div>
+            <div th:if="${#lists.isEmpty(allTestCases)}">
+                <p>Keine Testfälle vorhanden. Bitte zuerst Testfälle zu einer Anforderung erstellen.</p>
+            </div>
+            <div class="form__actions">
+                <button class="btn btn--yellow btn--inline" type="submit">Zuordnen</button>
+                <a class="link" th:href="@{'/testruns/' + ${runId}}">Abbrechen / Zurück</a>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

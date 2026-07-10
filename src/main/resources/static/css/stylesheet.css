@@ -1,0 +1,71 @@
+/* Require4Testing - schlichtes, funktionales Layout */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    color: #000;
+    background: #fff;
+}
+
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+/* Navigation */
+.topbar {
+    margin-bottom: 20px;
+    border-bottom: 1px solid #999;
+    padding-bottom: 8px;
+}
+
+.topbar__tab {
+    margin-right: 15px;
+}
+
+/* Titel */
+.titlebar__inner {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Tabellen */
+.datatable {
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.datatable th, .datatable td {
+    border: 1px solid #999;
+    padding: 5px 10px;
+    text-align: left;
+}
+
+/* Formulare */
+.form__row {
+    margin-bottom: 10px;
+}
+
+.form__row label {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.form__error {
+    color: red;
+    margin-left: 8px;
+}
+
+.form__actions {
+    margin-top: 12px;
+}
+
+.checkbox-row {
+    margin-bottom: 5px;
+}
+
+.inline-form {
+    display: inline;
+}
+
+/* Buttons und Links bleiben Standard-HTML */
